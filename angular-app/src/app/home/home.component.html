@@ -6,31 +6,31 @@
     <button class="btn btn-danger mt-3" (click)="logout()">Logout</button>
   </div>
 </div> -->
-
 <div class="page-center">
   <div
-    class="profile-card shadow-lg p-4 rounded-4 bg-white"
-    style="max-width: 500px; width: 100%; border: 1px solid #ddd;"
+    class="profile-card shadow-lg p-4 rounded-4 bg-white animate-card"
+    [@fadeSlideIn]
+    style="max-width: 520px; width: 100%; border: 1px solid #ddd;"
   >
-    <!-- Avatar -->
+    <!-- 🧑 Avatar -->
     <div class="text-center mb-3">
       <img
-        src="https://api.dicebear.com/9.x/adventurer/svg?seed={{ user?.username || 'coolboy' }}"
+        src="https://api.dicebear.com/9.x/adventurer-neutral/svg?seed={{ user?.username || 'coolboy' }}"
         alt="Profile Avatar"
         class="rounded-circle border border-3 border-dark shadow-sm mb-3"
-        width="120"
-        height="120"
+        width="130"
+        height="130"
       />
       <h2 class="text-dark fw-bold mb-1">
         Welcome, {{ user?.name || user?.username }} 👋
       </h2>
-      <p class="text-secondary mb-0">Your personal dashboard</p>
+      <p class="text-secondary">Your personal dashboard</p>
     </div>
 
     <hr />
 
-    <!-- Profile Details -->
-    <div class="profile-details mt-3 text-dark">
+    <!-- 📄 Profile Details -->
+    <div class="profile-details mt-3 text-dark fw-semibold">
       <p><strong>User ID:</strong> {{ user?.id }}</p>
       <p><strong>Full Name:</strong> {{ user?.name }}</p>
       <p><strong>Username:</strong> {{ user?.username }}</p>
@@ -41,16 +41,16 @@
 
     <hr />
 
-    <!-- Actions -->
+    <!-- ⚙️ Actions -->
     <div class="actions text-center mt-4">
       <button
-        class="btn btn-dark me-2 px-4 py-2 rounded-pill"
+        class="btn btn-dark me-2 px-4 py-2 rounded-pill hover-btn"
         (click)="goToProfile()"
       >
         ✏️ Edit Profile
       </button>
       <button
-        class="btn btn-outline-danger px-4 py-2 rounded-pill"
+        class="btn btn-outline-danger px-4 py-2 rounded-pill hover-btn"
         (click)="logout()"
       >
         🚪 Logout

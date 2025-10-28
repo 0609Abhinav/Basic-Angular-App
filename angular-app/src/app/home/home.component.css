@@ -39,3 +39,52 @@ hr {
   color: #000 !important;        /* Strong labels in true black */
   font-weight: 600;
 }
+
+
+/* 🌈 Center the page */
+.page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 💳 Profile Card Styling */
+.profile-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 👇 Darker text for visibility */
+.text-dark {
+  color: #212121 !important;
+}
+
+/* 🎨 Button hover styling */
+.hover-btn {
+  transition: all 0.3s ease;
+}
+
+.hover-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ✨ Fade + slide-in animation */
+.animate-card {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideIn 0.8s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
