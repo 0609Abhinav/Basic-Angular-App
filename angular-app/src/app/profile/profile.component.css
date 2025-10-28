@@ -1,0 +1,108 @@
+/* Background layout */
+body {
+  background: radial-gradient(circle at top left, #0f172a, #020617);
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  color: #f1f5f9;
+}
+
+/* Center alignment */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Main card styling */
+.profile-card {
+  background: rgba(30, 41, 59, 0.85); /* subtle glassy look */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 18px;
+  padding: 40px 45px;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* Header */
+.profile-card h3 {
+  font-weight: 700;
+  font-size: 22px;
+  color: #60a5fa;
+  margin-bottom: 32px;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+/* Form fields */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+label {
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* Inputs + textarea */
+input,
+textarea {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #f8fafc;
+  padding: 12px 14px;
+  font-size: 15px;
+  transition: all 0.25s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  outline: none;
+}
+
+/* Button */
+button {
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #1d4ed8, #1e40af);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Smooth responsiveness */
+@media (max-width: 576px) {
+  .profile-card {
+    padding: 30px 25px;
+  }
+}

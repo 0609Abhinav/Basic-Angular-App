@@ -1,0 +1,132 @@
+/* You can add global styles to this file, and also import other style files */
+/* 🌙 Global App Theme */
+body {
+  background: linear-gradient(135deg, #1f2937, #111827);
+  font-family: "Poppins", sans-serif;
+  color: #e5e7eb;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  color: #f9fafb;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 60px;
+}
+
+/* 🎴 Card Styling */
+.card {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 20px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  color: #f9fafb;
+}
+
+.card-header {
+  background: transparent;
+  border-bottom: none;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+/* 🧩 Input Fields */
+.form-control {
+  background-color: #111827;
+  border: 1px solid #374151;
+  color: #0a60b7;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 5px #3b82f6;
+  background-color: #0f172a;
+}
+
+/* ⚙️ Buttons */
+.btn-primary {
+  background-color: #2563eb;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+/* ✅ Success/Warning/Error Alerts */
+.alert {
+  border-radius: 10px;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+}
+
+.alert-success {
+  background-color: #16a34a;
+  color: white;
+}
+
+.alert-danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+/* 🔁 Spinner Centering */
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* 🧍 Center Forms */
+.page-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* 🪪 Profile Card */
+.profile-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.profile-card h3 {
+  color: #60a5fa;
+}
+
+.profile-card p {
+  color: #cbd5e1;
+  margin-bottom: 0.5rem;
+}

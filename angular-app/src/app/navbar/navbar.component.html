@@ -1,0 +1,137 @@
+<nav class="navbar navbar-expand-lg custom-navbar shadow-sm">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Brand (left) -->
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/">
+      ⚡ <span>AuthApp</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+<div
+  class="collapse navbar-collapse"
+  id="navbarNav"
+  style="
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  "
+>
+  <ul
+    class="navbar-nav"
+    style="
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    "
+  >
+    <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+      <a
+        class="nav-link"
+        routerLink="/login"
+        routerLinkActive="active"
+        style="
+          color: #cbd5e1;
+          font-weight: 500;
+          padding: 6px 14px;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+        "
+        onmouseover="this.style.color='#93c5fd'; this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#cbd5e1'; this.style.background='transparent'"
+      >Login</a>
+    </li>
+
+    <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+      <a
+        class="nav-link"
+        routerLink="/register"
+        routerLinkActive="active"
+        style="
+          color: #cbd5e1;
+          font-weight: 500;
+          padding: 6px 14px;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+        "
+        onmouseover="this.style.color='#93c5fd'; this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#cbd5e1'; this.style.background='transparent'"
+      >Register</a>
+    </li>
+
+    <li class="nav-item" *ngIf="auth.isLoggedIn()">
+      <a
+        class="nav-link"
+        routerLink="/home"
+        routerLinkActive="active"
+        style="
+          color: #cbd5e1;
+          font-weight: 500;
+          padding: 6px 14px;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+        "
+        onmouseover="this.style.color='#93c5fd'; this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#cbd5e1'; this.style.background='transparent'"
+      >Home</a>
+    </li>
+
+    <li class="nav-item" *ngIf="auth.isLoggedIn()">
+      <a
+        class="nav-link"
+        routerLink="/profile"
+        routerLinkActive="active"
+        style="
+          color: #cbd5e1;
+          font-weight: 500;
+          padding: 6px 14px;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+        "
+        onmouseover="this.style.color='#93c5fd'; this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#cbd5e1'; this.style.background='transparent'"
+      >Profile</a>
+    </li>
+
+    <li class="nav-item" *ngIf="auth.isLoggedIn()" style="margin-left: 1rem;">
+      <button
+        (click)="logout()"
+        style="
+          border: 1px solid #ef4444;
+          color: #fca5a5;
+          background: transparent;
+          border-radius: 8px;
+          padding: 6px 14px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.25s ease;
+        "
+        onmouseover="this.style.background='#ef4444'; this.style.color='white';"
+        onmouseout="this.style.background='transparent'; this.style.color='#fca5a5';"
+      >
+        Logout
+      </button>
+    </li>
+  </ul>
+</div>
+
+  </div>
+</nav>

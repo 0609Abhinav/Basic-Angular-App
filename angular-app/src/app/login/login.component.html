@@ -1,0 +1,79 @@
+<div class="container d-flex justify-content-center align-items-center vh-100 login-bg">
+  <div class="card shadow-lg p-4 border-0 rounded-4 login-card">
+    <div class="text-center mb-3">
+      <h3 class="fw-bold text-primary">Welcome Back 👋</h3>
+      <p class="text-muted small">Please log in to continue</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+      <!-- Username -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold " style="margin: 20px;">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="username"
+          required
+          placeholder="Enter your username"
+        />
+        <div class="text-danger mt-1" *ngIf="loginForm.submitted && !username">
+          <small>Username is required.</small>
+        </div>
+      </div>
+<br>
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold" style="margin: 20px;">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Enter your password"
+        />
+        <div class="text-danger mt-1" *ngIf="loginForm.submitted && !password">
+          <small>Password is required.</small>
+        </div>
+      </div>
+<br>
+      <!-- Remember Me -->
+      <div class="form-check mb-3">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="rememberMe"
+          [(ngModel)]="rememberMe"
+          name="rememberMe"
+        />
+        <label class="form-check-label" for="rememberMe">Remember Me</label>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger py-2 text-center">
+        {{ errorMessage }}
+      </div>
+<br>
+      <!-- Submit Button -->
+      <button
+        class="btn btn-primary w-100 py-2 mt-2 rounded-3 d-flex align-items-center justify-content-center"
+        [disabled]="loginForm.invalid || loading"
+      >
+        <ng-container *ngIf="!loading">
+          <i class="bi bi-box-arrow-in-right me-2"></i> Login
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <span class="spinner-border spinner-border-sm me-2"></span> Logging in...
+        </ng-container>
+      </button>
+<br>
+      <!-- Register Link -->
+      <p class="text-center mt-3 mb-0 text-muted">
+        Don’t have an account?
+        <br>
+        <a routerLink="/register" class="text-decoration-none fw-semibold">Register</a>
+      </p>
+    </form>
+  </div>
+</div>

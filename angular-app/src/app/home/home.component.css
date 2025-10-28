@@ -1,0 +1,41 @@
+.page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: linear-gradient(135deg, #0d5aa7b8, #e2e8f0);
+}
+
+.profile-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.text-dark {
+  color: #b20909 !important;
+}
+
+.text-secondary {
+  color: #666 !important;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.profile-details p {
+  color: #111 !important;        /* Force deep black text */
+  font-weight: 500;              /* Make it slightly bolder */
+  margin-bottom: 8px;            /* Add a little space between lines */
+}
+
+.profile-details strong {
+  color: #000 !important;        /* Strong labels in true black */
+  font-weight: 600;
+}

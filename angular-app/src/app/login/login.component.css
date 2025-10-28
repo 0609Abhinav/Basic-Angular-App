@@ -1,0 +1,135 @@
+/* ===== Login Page Styling ===== */
+
+/* Page background */
+.login-bg {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  background-attachment: fixed;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Login card */
+.login-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+  border-radius: 18px;
+  padding: 4rem 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  color: #f1f5f9;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Headings and text */
+.login-card h3 {
+  font-weight: 700;
+  color: #60a5fa;
+  margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+}
+
+.login-card p {
+  color: #94a3b8;
+  margin-bottom: 1rem;
+}
+
+/* Labels */
+.form-label {
+  color: #e2e8f0;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Inputs */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: #f8fafc;
+  padding: 0.65rem 0.9rem;
+  transition: all 0.25s ease;
+}
+
+.form-control::placeholder {
+  color: #94a3b8;
+  opacity: 0.8;
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+  color: #fff;
+}
+
+/* Checkbox */
+.form-check-label {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+/* Alert box */
+.alert {
+  border-radius: 10px;
+  font-size: 0.9rem;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* Button */
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Register link */
+.login-card a {
+  color: #60a5fa;
+  transition: color 0.25s ease;
+}
+
+.login-card a:hover {
+  color: #93c5fd;
+}
+
+/* Error messages */
+.text-danger small {
+  font-size: 0.85rem;
+  color: #fca5a5;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .login-card {
+    padding: 1.5rem;
+  }
+}

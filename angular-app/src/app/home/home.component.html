@@ -1,0 +1,60 @@
+<!-- <div class="page-center">
+  <div class="profile-card">
+    <h3>Welcome, {{ user?.name || user?.username }} 👋</h3>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
+    <p><strong>Username:</strong> {{ user?.username }}</p>
+    <button class="btn btn-danger mt-3" (click)="logout()">Logout</button>
+  </div>
+</div> -->
+
+<div class="page-center">
+  <div
+    class="profile-card shadow-lg p-4 rounded-4 bg-white"
+    style="max-width: 500px; width: 100%; border: 1px solid #ddd;"
+  >
+    <!-- Avatar -->
+    <div class="text-center mb-3">
+      <img
+        src="https://api.dicebear.com/9.x/adventurer/svg?seed={{ user?.username || 'coolboy' }}"
+        alt="Profile Avatar"
+        class="rounded-circle border border-3 border-dark shadow-sm mb-3"
+        width="120"
+        height="120"
+      />
+      <h2 class="text-dark fw-bold mb-1">
+        Welcome, {{ user?.name || user?.username }} 👋
+      </h2>
+      <p class="text-secondary mb-0">Your personal dashboard</p>
+    </div>
+
+    <hr />
+
+    <!-- Profile Details -->
+    <div class="profile-details mt-3 text-dark">
+      <p><strong>User ID:</strong> {{ user?.id }}</p>
+      <p><strong>Full Name:</strong> {{ user?.name }}</p>
+      <p><strong>Username:</strong> {{ user?.username }}</p>
+      <p><strong>Email:</strong> {{ user?.email }}</p>
+      <p><strong>Phone:</strong> {{ user?.phone || 'Not added yet' }}</p>
+      <p><strong>Address:</strong> {{ user?.address || 'Not added yet' }}</p>
+    </div>
+
+    <hr />
+
+    <!-- Actions -->
+    <div class="actions text-center mt-4">
+      <button
+        class="btn btn-dark me-2 px-4 py-2 rounded-pill"
+        (click)="goToProfile()"
+      >
+        ✏️ Edit Profile
+      </button>
+      <button
+        class="btn btn-outline-danger px-4 py-2 rounded-pill"
+        (click)="logout()"
+      >
+        🚪 Logout
+      </button>
+    </div>
+  </div>
+</div>

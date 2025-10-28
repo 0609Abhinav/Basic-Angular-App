@@ -1,0 +1,41 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.* 
+!.env.example
+
+# Build output
+dist/
+build/
+out/
+coverage/
+
+# Logs
+logs/
+*.log
+
+# Cache & temp
+.cache/
+tmp/
+temp/
+.eslintcache
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# SSL Keys
+*.pem
+*.key
+*.crt
