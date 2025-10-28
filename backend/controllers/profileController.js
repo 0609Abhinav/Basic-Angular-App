@@ -1,102 +1,95 @@
-// import User from '../models/userModel.js';
+import User from "../models/userModel.js";
 
-// // 🧩 Get Profile
-// export const getProfile = (req, res) => {
-//   const username = req.user.username;
-
-//   User.findByUsername(username, (err, result) => {
-//     if (err) return res.status(500).json({ message: 'Database error' });
-//     if (result.length === 0) return res.status(404).json({ message: 'User not found' });
-
-//     const user = result[0];
-//     delete user.password;
-//     res.json(user);
-//   });
-// };
-
-// // 🧩 Update Profile
-// export const updateProfile = (req, res) => {
-//   const username = req.user.username;
-//   const updatedData = req.body;
-
-//   User.updateProfile(username, updatedData, (err, result) => {
-//     if (err) return res.status(500).json({ message: 'Error updating profile' });
-//     res.json({ message: 'Profile updated successfully' });
-//   });
-// };
-
-
-import User from '../models/userModel.js';
-
-// 🟩 GET PROFILE
 export const getProfile = (req, res) => {
   try {
-    const username = req.user.username; // ✅ Comes from verified JWT
+    const username = req.user?.username;
 
     if (!username) {
-      return res.status(401).json({ message: 'Unauthorized: No username found in token' });
+      return res.status(401).json({ message: "Unauthorized: No username found in token" });
     }
 
     User.findByUsername(username, (err, result) => {
       if (err) {
-        console.error('❌ Database error:', err);
-        return res.status(500).json({ message: 'Database error' });
+        console.error("❌ Database error:", err);
+        return res.status(500).json({ message: "Database error" });
       }
 
-      if (result.length === 0) {
-        return res.status(404).json({ message: 'User not found' });
+      if (!result || result.length === 0) {
+        return res.status(404).json({ message: "User not found" });
       }
 
       const user = result[0];
-      delete user.password; // ✅ Hide sensitive info
+      delete user.password;
 
-      console.log(`📤 Sending profile for ${username}`);
+      // 🔍 LOG RAW VALUE FIRST
+      console.log("🧩 Raw phone from DB:", user.phone);
+
+      // ✅ Handle MySQL JSON, string, or null safely
+      if (user.phone === null || user.phone === undefined) {
+        user.phone = [];
+      } else if (typeof user.phone === "object" && Array.isArray(user.phone)) {
+        // Already parsed JSON (MySQL JSON column)
+        user.phone = user.phone;
+      } else if (typeof user.phone === "string") {
+        try {
+          const parsed = JSON.parse(user.phone);
+          user.phone = Array.isArray(parsed) ? parsed : [parsed];
+        } catch (err) {
+          console.warn("⚠️ Invalid JSON format in DB:", err.message);
+          user.phone = [user.phone];
+        }
+      } else {
+        user.phone = [];
+      }
+
+      console.log(`📤 Final phone for ${username}:`, user.phone);
+
       res.status(200).json(user);
     });
   } catch (error) {
-    console.error('❌ Server error in getProfile:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error("❌ Server error in getProfile:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
-
-// 🟩 UPDATE PROFILE
+// 🟢 UPDATE PROFILE
 export const updateProfile = (req, res) => {
   try {
-    const username = req.user.username; // ✅ Comes from JWT
-    const { name, email, phone, address } = req.body;
-
+    const username = req.user?.username;
     if (!username) {
-      return res.status(401).json({ message: 'Unauthorized: Missing username' });
+      return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    if (!name || !email) {
-      return res.status(400).json({ message: 'Name and email are required' });
-    }
+    const { name, email, address, phoneNumbers } = req.body;
 
+    // ✅ Ensure proper keys are used
     const updatedData = {
-      name,
-      email,
-      phone: phone || '',
-      address: address || ''
+      ...(name && { name }),
+      ...(email && { email }),
+      ...(address && { address }),
     };
 
-    console.log('📥 Updating profile for:', username, updatedData);
+    // ✅ Convert phoneNumbers array → JSON string
+    if (Array.isArray(phoneNumbers)) {
+      updatedData.phone = JSON.stringify(phoneNumbers);
+    }
+
+    console.log('📦 Updating profile for:', username, updatedData);
 
     User.updateProfile(username, updatedData, (err, result) => {
       if (err) {
         console.error('❌ Error updating profile:', err);
-        return res.status(500).json({ message: 'Error updating profile' });
+        return res.status(500).json({ message: 'Database update failed' });
       }
 
       if (result.affectedRows === 0) {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      console.log(`✅ Profile updated successfully for ${username}`);
+      console.log(`✅ Profile updated for ${username}`);
       res.status(200).json({ message: 'Profile updated successfully' });
     });
   } catch (error) {
-    console.error('❌ Server error in updateProfile:', error);
+    console.error('❌ updateProfile error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

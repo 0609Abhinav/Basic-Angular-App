@@ -1,37 +1,65 @@
 <div class="profile-wrapper">
   <div class="profile-card">
-    <h3>🧍 Update Profile</h3>
+    <h2 class="title">🧍 Update Profile</h2>
 
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
       <!-- Full Name -->
       <div class="form-group">
         <label>Full Name</label>
-        <input type="text" formControlName="name" />
+        <input type="text" formControlName="name" placeholder="Enter full name" />
       </div>
 
       <!-- Email -->
       <div class="form-group">
         <label>Email</label>
-        <input type="email" formControlName="email" />
-      </div>
-
-      <!-- Phone -->
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="text" formControlName="phone" />
+        <input type="email" formControlName="email" placeholder="Enter email" />
       </div>
 
       <!-- Address -->
       <div class="form-group">
         <label>Address</label>
-        <textarea rows="2" formControlName="address"></textarea>
+        <textarea formControlName="address" rows="2" placeholder="Enter address"></textarea>
       </div>
 
-      <button type="submit" [disabled]="profileForm.invalid || loading">
-        {{ loading ? 'Saving...' : 'Save Changes' }}
-      </button>
-    </form>
+      <!-- Phone Numbers -->
+      <div class="form-group">
+        <label>📞 Phone Numbers</label>
+        <div formArrayName="phoneNumbers">
+          <div class="phone-row" *ngFor="let control of phoneNumbers.controls; let i = index">
+            <input
+              type="text"
+              [formControlName]="i"
+              placeholder="Enter 10-digit phone number"
+              maxlength="10"
+            />
+            <button type="button" class="icon-btn delete-btn" (click)="removePhone(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
 
-    <p *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</p>
+          <div
+            class="error"
+            *ngIf="phoneNumbers.at(phoneNumbers.length - 1).invalid && phoneNumbers.at(phoneNumbers.length - 1).touched"
+          >
+            Phone number must be exactly 10 digits.
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn add-btn"
+          (click)="addPhone()"
+          [disabled]="phoneNumbers.at(phoneNumbers.length - 1).invalid"
+        >
+          <mat-icon>add</mat-icon> Add Phone
+        </button>
+      </div>
+
+      <button class="save-btn" type="submit" [disabled]="loading || profileForm.invalid">
+        {{ loading ? 'Saving...' : '💾 Save Changes' }}
+      </button> 
+
+      <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+    </form>
   </div>
 </div>

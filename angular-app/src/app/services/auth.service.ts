@@ -91,13 +91,13 @@ export class AuthService {
     this.restoreSession();
   }
 
-  //  Register user
+  // ✅ Register user
   register(userData: any): Observable<any> {
     console.log('Sending data to backend:', userData);
     return this.http.post(`${this.apiUrl}/auth/register`, userData);
   }
 
-  //  Login user
+  // ✅ Login user
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, credentials).pipe(
       tap((res: any) => {
@@ -109,7 +109,7 @@ export class AuthService {
     );
   }
 
-  //  Get profile (requires token)
+  // ✅ Get profile (requires token)
   getProfile(): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get(`${this.apiUrl}/profile`, { headers }).pipe(
@@ -121,53 +121,64 @@ export class AuthService {
     );
   }
 
-  //  Update profile
-  updateProfile(data: any): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/profile/update`, data, { headers }).pipe(
-      tap(() => {
-        const updatedUser = { ...this.getLoggedInUser(), ...data };
-        this.saveUserSession(localStorage.getItem('token')!, updatedUser);
-        this.userSubject.next(updatedUser); // 🟢 Update UI instantly
-      })
-    );
-  }
+  // // ✅ Update profile
+  // updateProfile(data: any): Observable<any> {
+  //   const headers = this.getAuthHeaders();
+  //   return this.http.put(`${this.apiUrl}/profile/update`, data, { headers }).pipe(
+  //     tap(() => {
+  //       const updatedUser = { ...this.getLoggedInUser(), ...data };
+  //       this.saveUserSession(localStorage.getItem('token')!, updatedUser);
+  //       this.userSubject.next(updatedUser); // 🟢 Update UI instantly
+  //     })
+  //   );
+  // }
+updateProfile(data: any): Observable<any> {
+  const headers = this.getAuthHeaders();
+  return this.http.patch(`${this.apiUrl}/profile/update`, data, { headers }).pipe(
+    tap(() => {
+      const updatedUser = { ...this.getLoggedInUser(), ...data };
+      this.saveUserSession(localStorage.getItem('token')!, updatedUser);
+      this.userSubject.next(updatedUser);
+    })
+  );
+}
 
-  // Save token and user info
+
+  // ✅ Save token and user info
   saveUserSession(token: string, user: any): void {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  //  Get current user snapshot
+  // ✅ Get current user snapshot
   getLoggedInUser(): any {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 
-  //  Restore user session on reload
+  // ✅ Restore user session on reload
   restoreSession(): void {
     const user = localStorage.getItem('user');
     if (user) {
       const parsed = JSON.parse(user);
       console.log('🔁 Session restored for:', parsed);
-      this.userSubject.next(parsed); //  Broadcast restored user
+      this.userSubject.next(parsed); // 🟢 Broadcast restored user
     }
   }
 
-  //  Logout user
+  // ✅ Logout user
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.userSubject.next(null);
   }
 
-  // Check if logged in
+  // ✅ Check if logged in
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
-  // Private helper to attach token
+  // ✅ Private helper to attach token
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders().set('Authorization', `Bearer ${token || ''}`);
