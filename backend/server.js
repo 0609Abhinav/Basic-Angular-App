@@ -32,7 +32,7 @@ app.use('/api/profile', profileRoutes);
 
 // Health check route
 app.get('/', (req, res) => {
-  res.send('✅ Backend server is running successfully!');
+  res.send('Backend server is running successfully!');
 });
 
 // Start server

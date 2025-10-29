@@ -21,8 +21,8 @@ export const getProfile = (req, res) => {
       const user = result[0];
       delete user.password;
 
-      // LOG RAW VALUE FIRST
-      console.log(" Raw phone from DB:", user.phone);
+      // // LOG RAW VALUE FIRST
+      // console.log(" Raw phone from DB:", user.phone);
 
       //  Handle MySQL JSON, string, or null safely
       if (user.phone === null || user.phone === undefined) {
@@ -42,7 +42,7 @@ export const getProfile = (req, res) => {
         user.phone = [];
       }
 
-      console.log(` Final phone for ${username}:`, user.phone);
+      // console.log(` Final phone for ${username}:`, user.phone);
 
       res.status(200).json(user);
     });
@@ -73,7 +73,7 @@ export const updateProfile = (req, res) => {
       updatedData.phone = JSON.stringify(phoneNumbers);
     }
 
-    console.log(' Updating profile for:', username, updatedData);
+    // console.log(' Updating profile for:', username, updatedData);
 
     User.updateProfile(username, updatedData, (err, result) => {
       if (err) {
@@ -85,7 +85,7 @@ export const updateProfile = (req, res) => {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      console.log(` Profile updated for ${username}`);
+      // console.log(` Profile updated for ${username}`);
       res.status(200).json({ message: 'Profile updated successfully' });
     });
   } catch (error) {

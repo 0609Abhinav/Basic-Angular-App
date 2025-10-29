@@ -15,8 +15,8 @@ const User = {
 
   //  Update user profile safely
   updateProfile: (username, data, callback) => {
-    console.log(' Updating profile for:', username);
-    console.log(' Incoming data:', data);
+    // console.log(' Updating profile for:', username);
+    // console.log(' Incoming data:', data);
 
     // Build dynamic update query based on provided fields
     const fields = [];
@@ -48,12 +48,12 @@ const User = {
     const query = `UPDATE users SET ${fields.join(', ')} WHERE username = ?`;
     values.push(username);
 
-    console.log(' Final Query:', query);
-    console.log(' Values:', values);
+    // console.log(' Final Query:', query);
+    // console.log(' Values:', values);
 
     db.query(query, values, (err, result) => {
       if (err) {
-        console.error('❌ Error updating profile:', err);
+        // console.error(' Error updating profile:', err);
         return callback(err, null);
       }
 
@@ -62,7 +62,7 @@ const User = {
         return callback(null, { message: 'User not found' });
       }
 
-      console.log(' Profile updated successfully for:', username);
+      // console.log(' Profile updated successfully for:', username);
       callback(null, result);
     });
   },
