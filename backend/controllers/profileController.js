@@ -10,7 +10,7 @@ export const getProfile = (req, res) => {
 
     User.findByUsername(username, (err, result) => {
       if (err) {
-        console.error("❌ Database error:", err);
+        console.error(" Database error:", err);
         return res.status(500).json({ message: "Database error" });
       }
 
@@ -21,10 +21,10 @@ export const getProfile = (req, res) => {
       const user = result[0];
       delete user.password;
 
-      // 🔍 LOG RAW VALUE FIRST
-      console.log("🧩 Raw phone from DB:", user.phone);
+      // LOG RAW VALUE FIRST
+      console.log(" Raw phone from DB:", user.phone);
 
-      // ✅ Handle MySQL JSON, string, or null safely
+      //  Handle MySQL JSON, string, or null safely
       if (user.phone === null || user.phone === undefined) {
         user.phone = [];
       } else if (typeof user.phone === "object" && Array.isArray(user.phone)) {
@@ -35,23 +35,23 @@ export const getProfile = (req, res) => {
           const parsed = JSON.parse(user.phone);
           user.phone = Array.isArray(parsed) ? parsed : [parsed];
         } catch (err) {
-          console.warn("⚠️ Invalid JSON format in DB:", err.message);
+          console.warn(" Invalid JSON format in DB:", err.message);
           user.phone = [user.phone];
         }
       } else {
         user.phone = [];
       }
 
-      console.log(`📤 Final phone for ${username}:`, user.phone);
+      console.log(` Final phone for ${username}:`, user.phone);
 
       res.status(200).json(user);
     });
   } catch (error) {
-    console.error("❌ Server error in getProfile:", error);
+    console.error(" Server error in getProfile:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
-// 🟢 UPDATE PROFILE
+//  UPDATE PROFILE
 export const updateProfile = (req, res) => {
   try {
     const username = req.user?.username;
@@ -61,23 +61,23 @@ export const updateProfile = (req, res) => {
 
     const { name, email, address, phoneNumbers } = req.body;
 
-    // ✅ Ensure proper keys are used
+    // Ensure proper keys are used
     const updatedData = {
       ...(name && { name }),
       ...(email && { email }),
       ...(address && { address }),
     };
 
-    // ✅ Convert phoneNumbers array → JSON string
+    //  Convert phoneNumbers array → JSON string
     if (Array.isArray(phoneNumbers)) {
       updatedData.phone = JSON.stringify(phoneNumbers);
     }
 
-    console.log('📦 Updating profile for:', username, updatedData);
+    console.log(' Updating profile for:', username, updatedData);
 
     User.updateProfile(username, updatedData, (err, result) => {
       if (err) {
-        console.error('❌ Error updating profile:', err);
+        console.error(' Error updating profile:', err);
         return res.status(500).json({ message: 'Database update failed' });
       }
 
@@ -85,11 +85,11 @@ export const updateProfile = (req, res) => {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      console.log(`✅ Profile updated for ${username}`);
+      console.log(` Profile updated for ${username}`);
       res.status(200).json({ message: 'Profile updated successfully' });
     });
   } catch (error) {
-    console.error('❌ updateProfile error:', error);
+    console.error(' updateProfile error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

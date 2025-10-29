@@ -1,66 +1,72 @@
-<div class="page-center">
-  <div
-    class="profile-card shadow-lg p-4 rounded-4 bg-white"
-    style="max-width: 520px; width: 100%; border: 1px solid #ddd;"
-    [@fadeSlideIn]
-  >
-    <!-- Avatar -->
-    <div class="text-center mb-3">
+<div class="dashboard-container">
+  <div class="profile-card animate-card">
+
+    <!-- Header Section -->
+    <div class="profile-header text-center">
       <img
-        src="https://api.dicebear.com/9.x/adventurer/svg?seed={{ user?.username || 'guest' }}"
+        [src]="'https://api.dicebear.com/9.x/adventurer/svg?seed=' + (user?.username || 'guest')"
         alt="Profile Avatar"
-        class="rounded-circle border border-3 border-dark shadow-sm mb-3"
-        width="130"
-        height="130"
+        class="avatar-img"
       />
-      <h2 class="text-dark fw-bold mb-1">
-        Welcome, {{ user?.name || user?.username }} 👋
-      </h2>
-      <p class="text-secondary">Your personal dashboard</p>
+      <h2>Welcome, <span>{{ user?.name || user?.username }}</span> 👋</h2>
+      <p class="subtitle">Your personal dashboard</p>
     </div>
 
-    <hr />
+    <div class="divider"></div>
 
     <!-- Profile Details -->
-    <div class="profile-details mt-3 text-dark fw-semibold">
-      <p><strong>User ID:</strong> {{ user?.id }}</p>
-      <p><strong>Full Name:</strong> {{ user?.name }}</p>
-      <p><strong>Username:</strong> {{ user?.username }}</p>
-      <p><strong>Email:</strong> {{ user?.email }}</p>
-
-      <!-- Phone Numbers -->
-      <div>
-        <strong>Phone Numbers:</strong>
-        <ul *ngIf="user?.phone?.length > 0; else noPhones" class="mt-2">
-          <li *ngFor="let ph of user.phone" class="d-flex align-items-center">
-            <mat-icon color="primary" style="margin-right: 8px;">phone</mat-icon>
-            {{ ph }}
-          </li>
-        </ul>
-        <ng-template #noPhones>
-          <p class="text-muted ms-2">No phone numbers added</p>
-        </ng-template>
+    <div class="profile-details">
+      <div class="info-row">
+        <span class="label">User ID:</span>
+        <span class="value">{{ user?.id }}</span>
       </div>
 
-      <p><strong>Address:</strong> {{ user?.address || 'Not added yet' }}</p>
+      <div class="info-row">
+        <span class="label">Full Name:</span>
+        <span class="value">{{ user?.name }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Username:</span>
+        <span class="value">{{ user?.username }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Email:</span>
+        <span class="value">{{ user?.email }}</span>
+      </div>
+
+      <div class="info-row align-start">
+        <span class="label">Phone Numbers:</span>
+        <div class="value">
+          <ul *ngIf="user?.phone?.length > 0; else noPhones">
+            <li *ngFor="let ph of user.phone">
+              <mat-icon color="primary" class="me-1">phone</mat-icon> {{ ph }}
+            </li>
+          </ul>
+          <ng-template #noPhones>
+            <span class="text-muted">No phone numbers added</span>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Address:</span>
+        <span class="value">{{ user?.address || 'Not added yet' }}</span>
+      </div>
     </div>
 
-    <hr />
+    <div class="divider"></div>
 
     <!-- Actions -->
-    <div class="actions text-center mt-4">
-      <button
-        class="btn btn-dark me-2 px-4 py-2 rounded-pill d-flex align-items-center justify-content-center gap-2"
-        (click)="goToProfile()"
-      >
+    <div class="action-buttons">
+      <button class="btn btn-primary" (click)="goToProfile()">
         <mat-icon>edit</mat-icon> Edit Profile
       </button>
-      <button
-        class="btn btn-outline-danger px-4 py-2 rounded-pill d-flex align-items-center justify-content-center gap-2"
-        (click)="logout()"
-      >
+      <button class="btn btn-danger" (click)="logout()">
         <mat-icon>logout</mat-icon> Logout
       </button>
     </div>
+
   </div>
 </div>

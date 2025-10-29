@@ -1,22 +1,22 @@
 import { db } from '../config/db.js';
 
 const User = {
-  // 🟢 Find a user by username
+  //  Find a user by username
   findByUsername: (username, callback) => {
     const query = 'SELECT * FROM users WHERE username = ?';
     db.query(query, [username], (err, results) => {
       if (err) {
-        console.error('❌ Error finding user:', err);
+        console.error(' Error finding user:', err);
         return callback(err, null);
       }
       callback(null, results);
     });
   },
 
-  // 🟢 Update user profile safely
+  //  Update user profile safely
   updateProfile: (username, data, callback) => {
-    console.log('🛠 Updating profile for:', username);
-    console.log('📦 Incoming data:', data);
+    console.log(' Updating profile for:', username);
+    console.log(' Incoming data:', data);
 
     // Build dynamic update query based on provided fields
     const fields = [];
@@ -41,15 +41,15 @@ const User = {
 
     // If no valid fields to update
     if (fields.length === 0) {
-      console.warn('⚠️ No valid fields to update for user:', username);
+      console.warn(' No valid fields to update for user:', username);
       return callback(new Error('No valid fields to update'), null);
     }
 
     const query = `UPDATE users SET ${fields.join(', ')} WHERE username = ?`;
     values.push(username);
 
-    console.log('🧩 Final Query:', query);
-    console.log('🧩 Values:', values);
+    console.log(' Final Query:', query);
+    console.log(' Values:', values);
 
     db.query(query, values, (err, result) => {
       if (err) {
@@ -58,11 +58,11 @@ const User = {
       }
 
       if (result.affectedRows === 0) {
-        console.warn('⚠️ No user found to update:', username);
+        console.warn(' No user found to update:', username);
         return callback(null, { message: 'User not found' });
       }
 
-      console.log('✅ Profile updated successfully for:', username);
+      console.log(' Profile updated successfully for:', username);
       callback(null, result);
     });
   },

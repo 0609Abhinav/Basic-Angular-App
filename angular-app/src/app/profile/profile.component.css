@@ -1,4 +1,4 @@
-/* Background layout */
+/* 🌌 Background */
 body {
   background: radial-gradient(circle at top left, #0f172a, #020617);
   font-family: "Inter", sans-serif;
@@ -6,7 +6,7 @@ body {
   color: #f1f5f9;
 }
 
-/* Center alignment */
+/* 🔹 Wrapper */
 .profile-wrapper {
   display: flex;
   justify-content: center;
@@ -15,35 +15,35 @@ body {
   padding: 20px;
 }
 
-/* Main card styling */
+/* 💳 Card */
 .profile-card {
-  background: rgba(30, 41, 59, 0.85); /* subtle glassy look */
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(30, 41, 59, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 18px;
   padding: 40px 45px;
   max-width: 460px;
   width: 100%;
-  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
   transition: all 0.3s ease;
 }
 
 .profile-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
 }
 
-/* Header */
-.profile-card h3 {
+/* 🧍 Title */
+.title {
   font-weight: 700;
-  font-size: 22px;
+  font-size: 24px;
   color: #60a5fa;
   margin-bottom: 32px;
-  text-align: left;
-  letter-spacing: 0.3px;
+  text-align: center;
+  letter-spacing: 0.4px;
 }
 
-/* Form fields */
+/* 🧾 Form Groups */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@ label {
   font-size: 14px;
 }
 
-/* Inputs + textarea */
+/* ✏️ Inputs + Textarea */
 input,
 textarea {
   background: #1e293b;
@@ -72,37 +72,138 @@ textarea {
 input:focus,
 textarea:focus {
   border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
   outline: none;
 }
 
-/* Button */
-button {
+/* 📞 Phone Rows */
+.phone-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* 🧩 Icon Buttons */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: #334155;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.icon-btn mat-icon {
+  font-size: 18px;
+}
+
+.icon-btn:hover {
+  background: #475569;
+  transform: translateY(-1px);
+}
+
+/* Add & Delete Buttons */
+.add-btn {
+  background: #2563eb;
+  color: #fff;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.add-btn:hover {
+  background: #1e40af;
+}
+
+.delete-btn {
+  background: #b91c1c;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #991b1b;
+}
+
+/* 💾 Save Button */
+.save-btn {
   width: 100%;
   background: linear-gradient(90deg, #2563eb, #1d4ed8);
   border: none;
-  color: white;
+  color: #fff;
   font-weight: 600;
   padding: 12px;
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s ease;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
-button:hover {
+.save-btn:hover {
   transform: translateY(-2px);
   background: linear-gradient(90deg, #1d4ed8, #1e40af);
 }
 
-button:disabled {
+.save-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Smooth responsiveness */
+/* ⚠️ Error Messages */
+.error-msg,
+.error-text {
+  color: #f87171;
+  font-size: 13px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+/* ✨ Animation */
+.animate-card {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
 @media (max-width: 576px) {
   .profile-card {
     padding: 30px 25px;
   }
+
+  .title {
+    font-size: 20px;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+  }
+
+  /* Success Toast */
+::ng-deep .success-snackbar {
+  background-color: #16a34a !important; /* green */
+  color: #fff !important;
+  font-weight: 600;
 }
+
+/* Error Toast */
+::ng-deep .error-snackbar {
+  background-color: #dc2626 !important; /* red */
+  color: #fff !important;
+  font-weight: 600;
+}
+
+}
+
+
