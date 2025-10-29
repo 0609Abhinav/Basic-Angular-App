@@ -1,135 +1,101 @@
-/* ===== Login Page Styling ===== */
-
-/* Page background */
-.login-bg {
+/* Background */
+.login-container {
   background: linear-gradient(135deg, #1e293b, #0f172a);
-  background-attachment: fixed;
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding: 1rem;
 }
 
-/* Login card */
+/* Glass card */
 .login-card {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(18px);
-  border-radius: 18px;
-  padding: 4rem 2.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   width: 100%;
-  max-width: 400px;
-  color: #f1f5f9;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease-in-out;
+  max-width: 380px;
+  color: #0070e0;
+  transition: 0.3s ease;
 }
 
 .login-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Headings and text */
-.login-card h3 {
-  font-weight: 700;
+/* Headings */
+.login-card h2 {
   color: #60a5fa;
-  margin-bottom: 0.25rem;
-  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
 }
 
 .login-card p {
-  color: #94a3b8;
-  margin-bottom: 1rem;
-}
-
-/* Labels */
-.form-label {
-  color: #e2e8f0;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-/* Inputs */
-.form-control {
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
-  color: #f8fafc;
-  padding: 0.65rem 0.9rem;
-  transition: all 0.25s ease;
-}
-
-.form-control::placeholder {
-  color: #94a3b8;
-  opacity: 0.8;
-}
-
-.form-control:focus {
-  background-color: rgba(255, 255, 255, 0.12);
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-  color: #fff;
-}
-
-/* Checkbox */
-.form-check-label {
-  color: #cbd5e1;
+  color: #dae3ee;
   font-size: 0.9rem;
 }
 
-.form-check-input {
-  cursor: pointer;
+/* Fields */
+mat-form-field {
+  background-color: rgba(201, 30, 30, 0.07);
+  border-radius: 10px;
 }
 
-/* Alert box */
-.alert {
-  border-radius: 10px;
-  font-size: 0.9rem;
-  background: rgba(239, 68, 68, 0.15);
-  color: #fecaca;
-  border: 1px solid rgba(239, 68, 68, 0.4);
+input.mat-input-element {
+  color: #f1f5f9 !important;
+}
+
+mat-label {
+  color: #114f9a !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background: rgba(96, 165, 250, 0.15) !important;
 }
 
 /* Button */
-.btn-primary {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  border: none;
-  border-radius: 10px;
+button[mat-raised-button] {
   font-weight: 600;
   font-size: 1rem;
-  transition: all 0.25s ease;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+button[mat-raised-button]:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
 }
 
-.btn-primary:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-/* Register link */
-.login-card a {
+/* Links */
+.link {
   color: #60a5fa;
-  transition: color 0.25s ease;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.login-card a:hover {
+.link:hover {
   color: #93c5fd;
 }
 
-/* Error messages */
-.text-danger small {
-  font-size: 0.85rem;
+/* Error Text */
+.error-text {
   color: #fca5a5;
+  font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 576px) {
-  .login-card {
-    padding: 1.5rem;
-  }
+/* Toast Styling */
+.toast-success {
+  background-color: #22c55e !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.toast-error {
+  background-color: #ef4444 !important;
+  color: #fff !important;
+  font-weight: 600;
 }

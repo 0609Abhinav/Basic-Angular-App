@@ -1,64 +1,99 @@
 <div class="register-container">
-  <h2>Register</h2>
-
-  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
-    <div>
-      <label for="name">Full Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        [(ngModel)]="name"
-        required
+  <div class="register-card animate-card">
+    <!-- Header -->
+    <div class="register-header text-center">
+      <img
+        [src]="'https://api.dicebear.com/9.x/adventurer/svg?seed=' + (username || 'newuser')"
+        alt="Avatar"
+        class="avatar-img"
       />
+      <h2>Create <span>Account</span> 📝</h2>
+      <p>Join us and start your journey!</p>
     </div>
 
-    <div>
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        [(ngModel)]="email"
-        required
-      />
-    </div>
+    <div class="divider"></div>
 
-    <div>
-      <label for="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        [(ngModel)]="username"
-        required
-      />
-    </div>
+    <!-- Register Form -->
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Full Name</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput name="name" [(ngModel)]="name" required />
+      </mat-form-field>
 
-    <div>
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="password"
-        required
-      />
-    </div>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput type="email" name="email" [(ngModel)]="email" required />
+      </mat-form-field>
 
-    <div>
-      <label for="confirmPassword">Confirm Password</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        name="confirmPassword"
-        [(ngModel)]="confirmPassword"
-        required
-      />
-    </div>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Username</mat-label>
+        <mat-icon matPrefix>account_circle</mat-icon>
+        <input matInput name="username" [(ngModel)]="username" required />
+      </mat-form-field>
 
-    <button type="submit" [disabled]="loading">Register</button>
-  </form>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword"
+        >
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
 
-  <p *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</p>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Confirm Password</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input
+          matInput
+          [type]="hideConfirm ? 'password' : 'text'"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hideConfirm = !hideConfirm"
+        >
+          <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="divider"></div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="w-100"
+        [disabled]="loading"
+        type="submit"
+      >
+        <ng-container *ngIf="!loading">
+          <mat-icon>person_add</mat-icon> Register
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <span class="spinner-border spinner-border-sm me-2"></span> Registering...
+        </ng-container>
+      </button>
+
+      <p class="text-center mt-3">
+        Already have an account?
+        <a routerLink="/login" class="link">Login</a>
+      </p>
+    </form>
+  </div>
 </div>

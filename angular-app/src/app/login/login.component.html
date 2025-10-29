@@ -1,78 +1,73 @@
-<div class="container d-flex justify-content-center align-items-center vh-100 login-bg">
-  <div class="card shadow-lg p-4 border-0 rounded-4 login-card">
-    <div class="text-center mb-3">
-      <h3 class="fw-bold text-primary">Welcome Back 👋</h3>
-      <p class="text-muted small">Please log in to continue</p>
+<div class="login-container">
+  <div class="login-card">
+    <div class="text-center mb-4">
+      <h2>Welcome Back 👋</h2>
+      <p>Please log in to continue</p>
     </div>
 
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
       <!-- Username -->
-      <div class="mb-3">
-        <label class="form-label fw-semibold " style="margin: 20px;">Username</label>
+      <mat-form-field appearance="fill" class="w-100 mb-3">
+        <mat-label>Username</mat-label>
         <input
+          matInput
           type="text"
-          class="form-control"
           name="username"
-          [(ngModel)]="username"
           required
+          [(ngModel)]="username"
           placeholder="Enter your username"
         />
-        <div class="text-danger mt-1" *ngIf="loginForm.submitted && !username">
-          <small>Username is required.</small>
-        </div>
-      </div>
-<br>
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+
       <!-- Password -->
-      <div class="mb-3">
-        <label class="form-label fw-semibold" style="margin: 20px;">Password</label>
+      <mat-form-field appearance="fill" class="w-100 mb-3">
+        <mat-label>Password</mat-label>
         <input
-          type="password"
-          class="form-control"
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
           name="password"
-          [(ngModel)]="password"
           required
+          [(ngModel)]="password"
           placeholder="Enter your password"
         />
-        <div class="text-danger mt-1" *ngIf="loginForm.submitted && !password">
-          <small>Password is required.</small>
-        </div>
-      </div>
-<br>
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword"
+        >
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
       <!-- Remember Me -->
-      <div class="form-check mb-3">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="rememberMe"
-          [(ngModel)]="rememberMe"
-          name="rememberMe"
-        />
-        <label class="form-check-label" for="rememberMe">Remember Me</label>
+      <div class="remember-me mb-3">
+        <mat-checkbox [(ngModel)]="rememberMe" name="rememberMe">Remember Me</mat-checkbox>
       </div>
 
       <!-- Error Message -->
-      <div *ngIf="errorMessage" class="alert alert-danger py-2 text-center">
+      <div *ngIf="errorMessage" class="error-text text-center mb-2">
         {{ errorMessage }}
       </div>
-<br>
-      <!-- Submit Button -->
+
+      <!-- Login Button -->
       <button
-        class="btn btn-primary w-100 py-2 mt-2 rounded-3 d-flex align-items-center justify-content-center"
-        [disabled]="loginForm.invalid || loading"
+        mat-raised-button
+        color="primary"
+        class="w-100 py-2"
+        [disabled]="loading || loginForm.invalid"
       >
-        <ng-container *ngIf="!loading">
-          <i class="bi bi-box-arrow-in-right me-2"></i> Login
-        </ng-container>
+        <ng-container *ngIf="!loading">Login</ng-container>
         <ng-container *ngIf="loading">
           <span class="spinner-border spinner-border-sm me-2"></span> Logging in...
         </ng-container>
       </button>
-<br>
+
       <!-- Register Link -->
-      <p class="text-center mt-3 mb-0 text-muted">
+      <p class="text-center mt-3">
         Don’t have an account?
-        <br>
-        <a routerLink="/register" class="text-decoration-none fw-semibold">Register</a>
+        <a routerLink="/register" class="link">Register</a>
       </p>
     </form>
   </div>

@@ -1,96 +1,80 @@
-// import { Component } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
-// import { CommonModule } from '@angular/common';
-// import { RouterModule, Router } from '@angular/router';
-// import { AuthService } from '../auth.service';
-
-// @Component({
-//   selector: 'app-login',
-//   standalone: true,
-//   imports: [CommonModule, FormsModule, RouterModule], //  Added RouterModule
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.css']
-// })
-// export class LoginComponent {
-//   username = '';
-//   password = '';
-//   rememberMe = false;
-//   loading = false;
-//   errorMessage = '';
-
-//   constructor(private auth: AuthService, private router: Router) {}
-
-//   ngOnInit() {
-//     // Redirect if already logged in
-//     if (this.auth.isLoggedIn()) {
-//       this.router.navigate(['/home']);
-//     }
-//   }
-
-//   onSubmit() {
-//     this.loading = true;
-//     this.errorMessage = '';
-
-//     this.auth.login(this.username, this.password, this.rememberMe).subscribe({
-//       next: () => {
-//         this.loading = false;
-//         alert(' Login successful!');
-//         this.router.navigate(['/home']);
-//       },
-//       error: err => {
-//         this.loading = false;
-//         this.errorMessage = err.message || ' Login failed';
-//       }
-//     });
-//   }
-// }
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service'; //  make sure path matches your service
+import { AuthService } from '../services/auth.service';
+
+/* Angular Material Imports */
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSnackBarModule
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username = '';
   password = '';
   rememberMe = false;
   loading = false;
   errorMessage = '';
+  hidePassword = true; // ✅ Fix for your template
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
-    // 🔹 Redirect if already logged in
     const token = localStorage.getItem('token');
     if (token) {
       this.router.navigate(['/home']);
     }
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.errorMessage = 'Please fill in all fields.';
+      return;
+    }
+
     this.loading = true;
     this.errorMessage = '';
 
-    // 🔹 Prepare credentials for backend
     const credentials = { username: this.username, password: this.password };
 
     this.authService.login(credentials).subscribe({
       next: (res) => {
         this.loading = false;
-        alert(' Login successful!');
 
-        // 🔹 Save token and user info
+        // ✅ Show success toast
+        this.snackBar.open('✅ Login successful!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['toast-success']
+        });
+
+        // Save token and user
         localStorage.setItem('token', res.token);
         localStorage.setItem('user', JSON.stringify(res.user));
 
-        // 🔹 Optional: remember login
         if (this.rememberMe) {
           localStorage.setItem('rememberMe', 'true');
         }
@@ -99,7 +83,15 @@ export class LoginComponent {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err.error?.message || ' Login failed. Please try again.';
+        this.errorMessage = err.error?.message || '❌ Login failed. Please try again.';
+
+        // Show error toast
+        this.snackBar.open(this.errorMessage, 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['toast-error']
+        });
       }
     });
   }

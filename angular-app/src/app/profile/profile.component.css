@@ -1,170 +1,155 @@
-/* 🌌 Background */
-body {
-  background: radial-gradient(circle at top left, #0f172a, #020617);
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  color: #f1f5f9;
-}
-
-/* 🔹 Wrapper */
-.profile-wrapper {
+/* 🌌 Layout */
+.dashboard-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  font-family: "Poppins", sans-serif;
+  padding: 1rem;
 }
 
 /* 💳 Card */
 .profile-card {
-  background: rgba(30, 41, 59, 0.88);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 18px;
-  padding: 40px 45px;
-  max-width: 460px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+  padding: 2.8rem;
   width: 100%;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  max-width: 520px;
   transition: all 0.3s ease;
 }
 
 .profile-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* 🧍 Title */
-.title {
-  font-weight: 700;
-  font-size: 24px;
-  color: #60a5fa;
-  margin-bottom: 32px;
+/* 🧍 Header */
+.profile-header {
   text-align: center;
-  letter-spacing: 0.4px;
+  margin-bottom: 1.8rem;
 }
 
-/* 🧾 Form Groups */
-.form-group {
+.avatar-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #1976d2;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.profile-header h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.profile-header h2 span {
+  color: #1976d2;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* 🧾 Form */
+.profile-form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 22px;
+  gap: 1.2rem; /* ⬅️ spacing between form fields */
 }
 
-label {
-  font-weight: 600;
-  color: #cbd5e1;
-  margin-bottom: 6px;
-  font-size: 14px;
+/* Mat Form Fields */
+mat-form-field {
+  width: 100%;
+  min-height: 70px; /* ⬅️ ensures clear separation vertically */
 }
 
-/* ✏️ Inputs + Textarea */
-input,
-textarea {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  color: #f8fafc;
-  padding: 12px 14px;
-  font-size: 15px;
-  transition: all 0.25s ease;
+/* 🎨 Glass Inputs */
+::ng-deep .mat-mdc-form-field {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 10px;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
 }
 
-input:focus,
-textarea:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-  outline: none;
+/* 🩵 On focus highlight */
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline {
+  border-color: #1976d2 !important;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.15);
 }
 
-/* 📞 Phone Rows */
+/* 📞 Phone Section */
+.phone-section {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 .phone-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 0.75rem;
 }
 
-/* 🧩 Icon Buttons */
-.icon-btn {
-  display: inline-flex;
+.phone-field {
+  flex: 1;
+}
+
+.phone-label {
+  font-weight: 600;
+  color: #374151;
+  display: flex;
   align-items: center;
-  gap: 5px;
-  border: none;
-  background: #334155;
-  color: #e2e8f0;
-  border-radius: 6px;
-  padding: 8px 10px;
-  cursor: pointer;
+  gap: 6px;
+}
+
+/* ✨ Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+
+button[mat-raised-button] {
+  padding: 0.85rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  text-transform: none;
+  letter-spacing: 0.3px;
   transition: all 0.25s ease;
 }
 
-.icon-btn mat-icon {
-  font-size: 18px;
-}
-
-.icon-btn:hover {
-  background: #475569;
-  transform: translateY(-1px);
-}
-
-/* Add & Delete Buttons */
-.add-btn {
-  background: #2563eb;
-  color: #fff;
-  margin-top: 8px;
-  font-weight: 500;
-}
-
-.add-btn:hover {
-  background: #1e40af;
-}
-
-.delete-btn {
-  background: #b91c1c;
-  color: #fff;
-}
-
-.delete-btn:hover {
-  background: #991b1b;
-}
-
-/* 💾 Save Button */
-.save-btn {
-  width: 100%;
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  margin-top: 10px;
-}
-
-.save-btn:hover {
+button[mat-raised-button]:hover {
   transform: translateY(-2px);
-  background: linear-gradient(90deg, #1d4ed8, #1e40af);
+  box-shadow: 0 6px 15px rgba(25, 118, 210, 0.3);
 }
 
-.save-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+/* Divider */
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1.6rem 0;
 }
 
-/* ⚠️ Error Messages */
-.error-msg,
+/* ⚠️ Error Text */
 .error-text {
-  color: #f87171;
-  font-size: 13px;
-  margin-top: 5px;
-  text-align: left;
+  color: #d32f2f;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 1rem;
 }
 
 /* ✨ Animation */
 .animate-card {
   opacity: 0;
-  transform: translateY(25px);
+  transform: translateY(30px);
   animation: fadeInUp 0.8s ease forwards;
 }
 
@@ -176,34 +161,13 @@ textarea:focus {
 }
 
 /* 📱 Responsive */
-@media (max-width: 576px) {
+@media (max-width: 600px) {
   .profile-card {
-    padding: 30px 25px;
+    padding: 2rem;
   }
 
-  .title {
-    font-size: 20px;
+  button[mat-raised-button],
+  button[mat-stroked-button] {
+    width: 100%;
   }
-
-  input,
-  textarea {
-    font-size: 14px;
-  }
-
-  /* Success Toast */
-::ng-deep .success-snackbar {
-  background-color: #16a34a !important; /* green */
-  color: #fff !important;
-  font-weight: 600;
 }
-
-/* Error Toast */
-::ng-deep .error-snackbar {
-  background-color: #dc2626 !important; /* red */
-  color: #fff !important;
-  font-weight: 600;
-}
-
-}
-
-
