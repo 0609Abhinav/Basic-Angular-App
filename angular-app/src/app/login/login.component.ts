@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   rememberMe = false;
   loading = false;
   errorMessage = '';
-  hidePassword = true; // ✅ Fix for your template
+  hidePassword = true; //  Fix for your template
 
   constructor(
     private authService: AuthService,
@@ -63,8 +63,8 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         this.loading = false;
 
-        // ✅ Show success toast
-        this.snackBar.open('✅ Login successful!', 'Close', {
+        //  Show success toast
+        this.snackBar.open(' Login successful!', 'Close', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
