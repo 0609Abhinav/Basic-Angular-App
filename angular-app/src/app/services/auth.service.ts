@@ -20,25 +20,25 @@ export class AuthService {
     this.restoreSession();
   }
 
-  // ✅ Register user
+  //  Register user
   register(userData: any): Observable<any> {
     console.log('Sending data to backend:', userData);
     return this.http.post(`${this.apiUrl}/auth/register`, userData);
   }
 
-  // ✅ Login user
+  //  Login user
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, credentials).pipe(
       tap((res: any) => {
         if (res.token && res.user) {
           this.saveUserSession(res.token, res.user);
-          this.userSubject.next(res.user); // 🔄 Update subscribers
+          this.userSubject.next(res.user); //  Update subscribers
         }
       })
     );
   }
 
-  // ✅ Get profile (requires token)
+  //  Get profile (requires token)
   getProfile(): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get(`${this.apiUrl}/profile`, { headers }).pipe(
